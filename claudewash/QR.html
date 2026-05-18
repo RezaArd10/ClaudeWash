@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>DrPowerClean — Free Quote</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Oswald:wght@600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Inter', -apple-system, sans-serif;
+      background: #1a4fba;
+      min-height: 100vh;
+      color: #1e293b;
+    }
+
+    /* ─── Header (white) ─── */
+    .site-header {
+      background: #ffffff;
+      padding: 1.4rem 1.5rem 1.6rem;
+      text-align: center;
+      box-shadow: 0 2px 16px rgba(0,0,0,0.12);
+    }
+    .site-header img {
+      width: 210px;
+      max-width: 68vw;
+      display: block;
+      margin: 0 auto 0.5rem;
+    }
+    .header-sub {
+      font-family: 'Oswald', sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: #94a3b8;
+      margin-bottom: 1rem;
+    }
+    .header-badge {
+      display: inline-flex;
+      flex-direction: column;
+      align-items: center;
+      background: linear-gradient(135deg, #1565c0, #1e90ff);
+      color: #fff;
+      font-family: 'Oswald', sans-serif;
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      padding: 9px 28px 7px;
+      border-radius: 36px;
+      box-shadow: 0 4px 16px rgba(21,101,192,0.35);
+    }
+    .header-badge small {
+      font-family: 'Inter', sans-serif;
+      font-size: 11px;
+      font-weight: 400;
+      letter-spacing: 0.04em;
+      opacity: 0.85;
+      text-transform: none;
+    }
+
+    /* ─── How it works ─── */
+    .how-it-works {
+      background: linear-gradient(180deg, #1245a8 0%, #1a4fba 100%);
+      padding: 1.6rem 1.2rem 1.8rem;
+    }
+    .hiw-title {
+      text-align: center;
+      font-family: 'Oswald', sans-serif;
+      font-size: 12px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.55);
+      margin-bottom: 1.1rem;
+    }
+    .steps {
+      display: flex;
+      align-items: flex-start;
+      justify-content: center;
+      gap: 0;
+      max-width: 480px;
+      margin: 0 auto;
+    }
+    .step {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 7px;
+      text-align: center;
+      padding: 0 6px;
+    }
+    .step-bubble {
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.12);
+      border: 2px solid rgba(255,255,255,0.3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      flex-shrink: 0;
+    }
+    .step-num {
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      color: rgba(255,255,255,0.5);
+      text-transform: uppercase;
+    }
+    .step-desc {
+      font-size: 12px;
+      font-weight: 500;
+      color: rgba(255,255,255,0.88);
+      line-height: 1.4;
+    }
+    .step-connector {
+      flex-shrink: 0;
+      width: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding-top: 14px;
+      color: rgba(255,255,255,0.3);
+      font-size: 16px;
+    }
+
+    /* ─── Form wrap ─── */
+    .form-bg {
+      background: linear-gradient(180deg, #1a4fba 0%, #0f3499 100%);
+      padding: 1.4rem 1rem 3rem;
+    }
+    .form-card {
+      max-width: 520px;
+      margin: 0 auto;
+      background: #fff;
+      border-radius: 18px;
+      padding: 1.8rem 1.6rem 2rem;
+      box-shadow: 0 20px 60px rgba(0,0,0,0.35);
+    }
+
+    /* ─── Section labels ─── */
+    .section-label {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: #1565c0;
+      margin: 1.8rem 0 1rem;
+      font-weight: 700;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      height: 2px;
+      background: linear-gradient(90deg, #dbeafe, transparent);
+      border-radius: 2px;
+    }
+    .section-label:first-child { margin-top: 0; }
+
+    /* ─── Fields ─── */
+    .field { margin-bottom: 1rem; }
+    .field-label {
+      display: block;
+      font-size: 12px;
+      font-weight: 600;
+      color: #475569;
+      margin-bottom: 5px;
+      letter-spacing: 0.02em;
+    }
+    .field-label .opt { font-weight: 400; color: #94a3b8; }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 11px 14px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 10px;
+      font-size: 15px;
+      font-family: 'Inter', sans-serif;
+      color: #1e293b;
+      background: #f8fafc;
+      transition: border-color 0.18s, box-shadow 0.18s, background 0.18s;
+    }
+    input[type="text"]:focus,
+    input[type="email"]:focus,
+    input[type="tel"]:focus,
+    select:focus,
+    textarea:focus {
+      outline: none;
+      border-color: #1e90ff;
+      background: #fff;
+      box-shadow: 0 0 0 3px rgba(30,144,255,0.13);
+    }
+    textarea { resize: vertical; min-height: 80px; }
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%2394a3b8' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 14px center;
+      background-color: #f8fafc;
+      padding-right: 36px;
+      cursor: pointer;
+    }
+
+    /* ─── Service cards ─── */
+    .service-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 9px;
+    }
+    .svc { position: relative; }
+    .svc input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .svc-label {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      padding: 13px 34px 12px 12px;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 11px;
+      cursor: pointer;
+      background: #f8fafc;
+      transition: all 0.15s;
+      height: 100%;
+    }
+    .svc input:checked + .svc-label {
+      border-color: #1565c0;
+      background: #1565c0;
+      box-shadow: 0 4px 14px rgba(21,101,192,0.3);
+    }
+    .svc input:checked + .svc-label .svc-name { color: #fff; }
+    .svc input:checked + .svc-label .svc-sub { color: rgba(255,255,255,0.7); }
+    .svc input:checked + .svc-label .svc-badge { background: rgba(255,255,255,0.25); color: #fff; }
+
+    .svc-check {
+      position: absolute;
+      top: 9px; right: 9px;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      border: 1.5px solid #cbd5e1;
+      background: white;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .svc input:checked + .svc-label .svc-check {
+      background: rgba(255,255,255,0.3);
+      border-color: rgba(255,255,255,0.5);
+    }
+    .svc-check::after {
+      content: '';
+      width: 4px; height: 7px;
+      border-right: 2px solid #1565c0;
+      border-bottom: 2px solid #1565c0;
+      transform: rotate(45deg) translate(-1px, -1px);
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+    .svc input:checked + .svc-label .svc-check::after {
+      border-color: white;
+      opacity: 1;
+    }
+    .svc-badge {
+      display: inline-block;
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      background: #1565c0;
+      color: white;
+      padding: 2px 7px;
+      border-radius: 20px;
+      align-self: flex-start;
+    }
+    .svc-icon { font-size: 22px; line-height: 1; }
+    .svc-name { font-size: 12px; font-weight: 600; color: #1e293b; line-height: 1.35; transition: color 0.15s; }
+    .svc-sub { font-weight: 400; color: #64748b; transition: color 0.15s; }
+
+    /* Featured window cards */
+    .svc.featured .svc-label {
+      border: 2.5px solid #1565c0;
+      background: #eff6ff;
+    }
+    .svc.featured .svc-badge { background: #1565c0; color: white; }
+
+    /* ─── Day toggles ─── */
+    .day-row { display: flex; gap: 6px; flex-wrap: wrap; }
+    .day { position: relative; }
+    .day input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
+    .day-lbl {
+      display: block;
+      padding: 8px 13px;
+      border-radius: 22px;
+      border: 1.5px solid #e2e8f0;
+      font-size: 13px;
+      font-weight: 600;
+      color: #64748b;
+      cursor: pointer;
+      background: #f8fafc;
+      transition: all 0.15s;
+      user-select: none;
+    }
+    .day input:checked + .day-lbl {
+      background: #1565c0;
+      border-color: #1565c0;
+      color: white;
+      box-shadow: 0 2px 8px rgba(21,101,192,0.3);
+    }
+
+    /* ─── Photo zone ─── */
+    .photo-drop {
+      border: 2px dashed #cbd5e1;
+      border-radius: 12px;
+      background: #f8fafc;
+      padding: 1.5rem 1rem;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color 0.18s, background 0.18s;
+      position: relative;
+    }
+    .photo-drop:hover, .photo-drop.drag-over {
+      border-color: #1e90ff;
+      background: #f0f7ff;
+    }
+    .photo-drop input[type="file"] {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+      width: 100%;
+      height: 100%;
+    }
+    .drop-icon { font-size: 28px; margin-bottom: 5px; }
+    .drop-cta { font-size: 14px; font-weight: 600; color: #1565c0; }
+    .drop-hint { font-size: 12px; color: #94a3b8; margin-top: 3px; }
+
+    .photo-btns { display: flex; gap: 8px; margin-top: 10px; }
+    .photo-btn-lbl {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 10px 12px;
+      border-radius: 9px;
+      border: 1.5px solid #e2e8f0;
+      background: white;
+      font-size: 13px;
+      font-weight: 600;
+      color: #475569;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .photo-btn-lbl:hover { border-color: #1e90ff; color: #1565c0; background: #f0f7ff; }
+
+    .preview-grid { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .preview-thumb {
+      position: relative;
+      width: 80px; height: 80px;
+      border-radius: 9px;
+      overflow: hidden;
+      border: 2px solid #e2e8f0;
+      flex-shrink: 0;
+    }
+    .preview-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .remove-btn {
+      position: absolute;
+      top: 3px; right: 3px;
+      width: 20px; height: 20px;
+      background: rgba(0,0,0,0.65);
+      color: white;
+      border: none;
+      border-radius: 50%;
+      font-size: 11px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+    }
+
+    /* ─── Submit ─── */
+    .btn-submit {
+      width: 100%;
+      margin-top: 0.5rem;
+      padding: 15px;
+      background: linear-gradient(135deg, #1245a8 0%, #1e90ff 100%);
+      color: white;
+      border: none;
+      border-radius: 12px;
+      font-family: 'Oswald', sans-serif;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      box-shadow: 0 6px 22px rgba(18,69,168,0.45);
+    }
+    .btn-submit:hover { opacity: 0.92; }
+    .btn-submit:active { transform: scale(0.98); }
+
+    /* ─── Messages ─── */
+    .msg {
+      display: none;
+      padding: 13px 16px;
+      border-radius: 9px;
+      text-align: center;
+      font-size: 14px;
+      font-weight: 500;
+      margin-top: 1rem;
+    }
+    .msg-success { background: #dcfce7; color: #166534; }
+    .msg-error   { background: #fee2e2; color: #991b1b; }
+  </style>
+</head>
+<body>
+
+<!-- ─── White Header ─── -->
+<header class="site-header">
+  <img src="images/drpowerclean-logo.jpeg" alt="DrPowerClean.com">
+  <div class="header-sub">Professional Powerwashing &amp; Window Cleaning · New Hope, PA</div>
+  <div class="header-badge">
+    Free Quote
+    <small>No obligation &mdash; we'll get back to you fast</small>
+  </div>
+</header>
+
+<!-- ─── How It Works ─── -->
+<div class="how-it-works">
+  <div class="hiw-title">How it works</div>
+  <div class="steps">
+    <div class="step">
+      <div class="step-bubble">📋</div>
+      <div class="step-num">Step 1</div>
+      <div class="step-desc">Fill out this quick form — 2 minutes</div>
+    </div>
+    <div class="step-connector">›</div>
+    <div class="step">
+      <div class="step-bubble">🏠</div>
+      <div class="step-num">Step 2</div>
+      <div class="step-desc">Our team visits your property at no charge</div>
+    </div>
+    <div class="step-connector">›</div>
+    <div class="step">
+      <div class="step-bubble">✅</div>
+      <div class="step-num">Step 3</div>
+      <div class="step-desc">Get a clear, fair quote — same day</div>
+    </div>
+  </div>
+</div>
+
+<!-- ─── Form ─── -->
+<div class="form-bg">
+  <div class="form-card">
+    <form id="quoteForm" novalidate>
+
+      <div class="section-label">Contact Info</div>
+
+      <div class="field">
+        <label class="field-label" for="from_name">Name</label>
+        <input type="text" id="from_name" name="from_name" placeholder="Your full name" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="phone">Phone</label>
+        <input type="tel" id="phone" name="phone" placeholder="(215) 555-0100" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="email">Email</label>
+        <input type="email" id="email" name="email" placeholder="you@email.com" required>
+      </div>
+      <div class="field">
+        <label class="field-label" for="address">Service Address</label>
+        <input type="text" id="address" name="address" placeholder="123 Main St, New Hope, PA" required>
+      </div>
+
+      <div class="section-label">Services Needed</div>
+
+      <div class="service-grid">
+        <div class="svc featured">
+          <input type="checkbox" id="svc_win_ext" name="service[]" value="Window Cleaning — Exterior">
+          <label class="svc-label" for="svc_win_ext">
+            <div class="svc-check"></div>
+            <span class="svc-badge">Our Specialty</span>
+            <span class="svc-icon">🪟</span>
+            <span class="svc-name">Window Cleaning<br><span class="svc-sub">Exterior only</span></span>
+          </label>
+        </div>
+        <div class="svc featured">
+          <input type="checkbox" id="svc_win_both" name="service[]" value="Window Cleaning — Interior & Exterior">
+          <label class="svc-label" for="svc_win_both">
+            <div class="svc-check"></div>
+            <span class="svc-badge">Our Specialty</span>
+            <span class="svc-icon">✨</span>
+            <span class="svc-name">Window Cleaning<br><span class="svc-sub">Int. + Ext.</span></span>
+          </label>
+        </div>
+        <div class="svc">
+          <input type="checkbox" id="svc_drive" name="service[]" value="Driveway & Sidewalk Powerwash">
+          <label class="svc-label" for="svc_drive">
+            <div class="svc-check"></div>
+            <span class="svc-icon">🚗</span>
+            <span class="svc-name">Driveway &amp;<br>Sidewalk Wash</span>
+          </label>
+        </div>
+        <div class="svc">
+          <input type="checkbox" id="svc_patio" name="service[]" value="Patio & Deck Powerwash">
+          <label class="svc-label" for="svc_patio">
+            <div class="svc-check"></div>
+            <span class="svc-icon">🌿</span>
+            <span class="svc-name">Patio &amp;<br>Deck Wash</span>
+          </label>
+        </div>
+        <div class="svc">
+          <input type="checkbox" id="svc_house" name="service[]" value="House & Siding Powerwash">
+          <label class="svc-label" for="svc_house">
+            <div class="svc-check"></div>
+            <span class="svc-icon">🏠</span>
+            <span class="svc-name">House &amp;<br>Siding Wash</span>
+          </label>
+        </div>
+        <div class="svc">
+          <input type="checkbox" id="svc_trash" name="service[]" value="Trash Bin Cleaning">
+          <label class="svc-label" for="svc_trash">
+            <div class="svc-check"></div>
+            <span class="svc-icon">🗑️</span>
+            <span class="svc-name">Trash Bin<br>Cleaning</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="section-label">Availability</div>
+
+      <div class="field">
+        <label class="field-label">Days Available</label>
+        <div class="day-row">
+          <div class="day"><input type="checkbox" id="d_mon" name="days[]" value="Mon"><label class="day-lbl" for="d_mon">Mon</label></div>
+          <div class="day"><input type="checkbox" id="d_tue" name="days[]" value="Tue"><label class="day-lbl" for="d_tue">Tue</label></div>
+          <div class="day"><input type="checkbox" id="d_wed" name="days[]" value="Wed"><label class="day-lbl" for="d_wed">Wed</label></div>
+          <div class="day"><input type="checkbox" id="d_thu" name="days[]" value="Thu"><label class="day-lbl" for="d_thu">Thu</label></div>
+          <div class="day"><input type="checkbox" id="d_fri" name="days[]" value="Fri"><label class="day-lbl" for="d_fri">Fri</label></div>
+          <div class="day"><input type="checkbox" id="d_sat" name="days[]" value="Sat"><label class="day-lbl" for="d_sat">Sat</label></div>
+          <div class="day"><input type="checkbox" id="d_sun" name="days[]" value="Sun"><label class="day-lbl" for="d_sun">Sun</label></div>
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="field-label" for="timing">When would you like this done?</label>
+        <select id="timing" name="timing" required>
+          <option value="">Select timing</option>
+          <option value="ASAP">ASAP</option>
+          <option value="Next 2 weeks">Next 2 weeks</option>
+          <option value="This month">This month</option>
+          <option value="Next month">Next month</option>
+          <option value="Flexible">Flexible</option>
+        </select>
+      </div>
+
+      <div class="section-label">Notes &amp; Photos</div>
+
+      <div class="field">
+        <label class="field-label" for="notes">Additional notes <span class="opt">(optional)</span></label>
+        <textarea id="notes" name="notes" placeholder="Anything we should know about the job..."></textarea>
+      </div>
+
+      <div class="field">
+        <label class="field-label">Photos of the job <span class="opt">(optional)</span></label>
+
+        <div class="photo-drop" id="photoZone">
+          <input type="file" id="dropInput" accept="image/*" multiple>
+          <div class="drop-icon">📷</div>
+          <div class="drop-cta">Tap to add photos</div>
+          <div class="drop-hint">Or drag &amp; drop — JPG, PNG, HEIC</div>
+        </div>
+
+        <div class="photo-btns">
+          <label class="photo-btn-lbl" for="cameraInput">📸 Take Photo</label>
+          <input type="file" id="cameraInput" accept="image/*" capture="environment" style="display:none">
+          <label class="photo-btn-lbl" for="galleryInput">🖼️ Choose from Gallery</label>
+          <input type="file" id="galleryInput" accept="image/*" multiple style="display:none">
+        </div>
+
+        <div class="preview-grid" id="previewGrid"></div>
+      </div>
+
+      <button type="submit" class="btn-submit">Send My Quote Request →</button>
+    </form>
+
+    <div class="msg msg-success" id="successMsg">🎉 Thanks! We've got your request and will reach out shortly.</div>
+    <div class="msg msg-error"   id="errorMsg">Something went wrong. Please try again.</div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/build/index.min.js"></script>
+<script>
+  emailjs.init('RHK1G1V0vfd8qLuzz');
+
+  let selectedFiles = [];
+
+  function addFiles(fileList) {
+    for (const file of fileList) {
+      if (!file.type.startsWith('image/')) continue;
+      const index = selectedFiles.length;
+      selectedFiles.push(file);
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const grid = document.getElementById('previewGrid');
+        const thumb = document.createElement('div');
+        thumb.className = 'preview-thumb';
+        thumb.dataset.index = index;
+        thumb.innerHTML = `<img src="${e.target.result}" alt="Photo"><button type="button" class="remove-btn" data-index="${index}">✕</button>`;
+        grid.appendChild(thumb);
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  document.getElementById('previewGrid').addEventListener('click', (e) => {
+    if (!e.target.classList.contains('remove-btn')) return;
+    const index = parseInt(e.target.dataset.index);
+    selectedFiles[index] = null;
+    e.target.closest('.preview-thumb').remove();
+  });
+
+  ['dropInput', 'cameraInput', 'galleryInput'].forEach(id => {
+    document.getElementById(id).addEventListener('change', function () {
+      addFiles(this.files);
+      this.value = '';
+    });
+  });
+
+  const zone = document.getElementById('photoZone');
+  zone.addEventListener('dragover',  (e) => { e.preventDefault(); zone.classList.add('drag-over'); });
+  zone.addEventListener('dragleave', ()  => zone.classList.remove('drag-over'));
+  zone.addEventListener('drop', (e) => {
+    e.preventDefault();
+    zone.classList.remove('drag-over');
+    addFiles(e.dataTransfer.files);
+  });
+
+  document.getElementById('quoteForm').addEventListener('submit', async function (e) {
+    e.preventDefault();
+    const services = [...document.querySelectorAll('input[name="service[]"]:checked')].map(el => el.value);
+    const days     = [...document.querySelectorAll('input[name="days[]"]:checked')].map(el => el.value);
+    const params = {
+      from_name:      document.getElementById('from_name').value,
+      phone:          document.getElementById('phone').value,
+      email:          document.getElementById('email').value,
+      address:        document.getElementById('address').value,
+      service:        services.length ? services.join(', ') : '(none selected)',
+      days_available: days.length     ? days.join(', ')     : '(none selected)',
+      timing:         document.getElementById('timing').value,
+      notes:          document.getElementById('notes').value || '(none)',
+    };
+    try {
+      await emailjs.send('service_5ib00zr', 'template_ww3qlrb', params);
+      document.getElementById('successMsg').style.display = 'block';
+      document.getElementById('errorMsg').style.display   = 'none';
+      this.reset();
+      selectedFiles = [];
+      document.getElementById('previewGrid').innerHTML = '';
+      setTimeout(() => { document.getElementById('successMsg').style.display = 'none'; }, 5000);
+    } catch {
+      document.getElementById('errorMsg').style.display   = 'block';
+      document.getElementById('successMsg').style.display = 'none';
+    }
+  });
+</script>
+
+</body>
+</html>
