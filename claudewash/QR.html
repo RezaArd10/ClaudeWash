@@ -597,10 +597,7 @@
   </div>
 </div>
 
-<script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/build/index.min.js"></script>
 <script>
-  emailjs.init('RHK1G1V0vfd8qLuzz');
-
   let selectedFiles = [];
 
   function addFiles(fileList) {
@@ -648,18 +645,28 @@
     e.preventDefault();
     const services = [...document.querySelectorAll('input[name="service[]"]:checked')].map(el => el.value);
     const days     = [...document.querySelectorAll('input[name="days[]"]:checked')].map(el => el.value);
-    const params = {
-      from_name:      document.getElementById('from_name').value,
-      phone:          document.getElementById('phone').value,
-      email:          document.getElementById('email').value,
-      address:        document.getElementById('address').value,
-      service:        services.length ? services.join(', ') : '(none selected)',
-      days_available: days.length     ? days.join(', ')     : '(none selected)',
-      timing:         document.getElementById('timing').value,
-      notes:          document.getElementById('notes').value || '(none)',
-    };
+
+    const data = new FormData();
+    data.append('name',           document.getElementById('from_name').value);
+    data.append('phone',          document.getElementById('phone').value);
+    data.append('email',          document.getElementById('email').value);
+    data.append('address',        document.getElementById('address').value);
+    data.append('services',       services.length ? services.join(', ') : '(none selected)');
+    data.append('days_available', days.length     ? days.join(', ')     : '(none selected)');
+    data.append('timing',         document.getElementById('timing').value);
+    data.append('notes',          document.getElementById('notes').value || '(none)');
+
+    const btn = this.querySelector('.btn-submit');
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
     try {
-      await emailjs.send('service_5ib00zr', 'template_ww3qlrb', params);
+      const res = await fetch('https://formspree.io/f/mojbvavk', {
+        method: 'POST',
+        body: data,
+        headers: { 'Accept': 'application/json' }
+      });
+      if (!res.ok) throw new Error();
       document.getElementById('successMsg').style.display = 'block';
       document.getElementById('errorMsg').style.display   = 'none';
       this.reset();
@@ -669,6 +676,9 @@
     } catch {
       document.getElementById('errorMsg').style.display   = 'block';
       document.getElementById('successMsg').style.display = 'none';
+    } finally {
+      btn.textContent = 'Send My Quote Request →';
+      btn.disabled = false;
     }
   });
 </script>
