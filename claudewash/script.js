@@ -1,7 +1,7 @@
 (function () {
 
   // ── EMAIL ──
-  var u = 'drpowerwashingpa';
+  var u = 'drpowerclean.co';
   var d = 'gmail' + '.' + 'com';
   var addr = u + '@' + d;
   var el = document.getElementById('emailLink');

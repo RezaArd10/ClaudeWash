@@ -229,7 +229,7 @@
       border: 1.5px solid #e2e8f0;
       border-radius: 11px;
       cursor: pointer;
-      background: #f8fafc;
+      background: #fff;
       transition: all 0.15s;
       height: 100%;
     }
@@ -288,33 +288,55 @@
     /* Featured window cards */
     .svc.featured .svc-label {
       border: 2.5px solid #1565c0;
-      background: #eff6ff;
+      background: #fff;
     }
     .svc.featured .svc-badge { background: #1565c0; color: white; }
 
     /* ─── Day toggles ─── */
+    .avail-banner {
+      display: flex; align-items: center; gap: 7px;
+      background: #fff5f5; border: 1.5px solid #fecaca;
+      border-radius: 9px; padding: 8px 12px;
+      font-size: 12px; font-weight: 600; color: #b91c1c;
+      margin-bottom: 10px;
+    }
+    .avail-banner span { font-weight: 400; color: #7f1d1d; }
     .day-row { display: flex; gap: 6px; flex-wrap: wrap; }
     .day { position: relative; }
     .day input[type="checkbox"] { position: absolute; opacity: 0; width: 0; height: 0; }
     .day-lbl {
-      display: block;
-      padding: 8px 13px;
-      border-radius: 22px;
+      display: flex; flex-direction: column; align-items: center;
+      padding: 7px 11px 5px;
+      border-radius: 10px;
       border: 1.5px solid #e2e8f0;
-      font-size: 13px;
-      font-weight: 600;
-      color: #64748b;
-      cursor: pointer;
-      background: #f8fafc;
-      transition: all 0.15s;
-      user-select: none;
+      font-size: 13px; font-weight: 700;
+      color: #475569; cursor: pointer;
+      background: #fff; transition: all 0.15s;
+      user-select: none; line-height: 1;
+      font-family: 'Oswald', sans-serif; letter-spacing: 0.04em;
     }
+    .day-lbl .day-name { display: block; font-size: 13px; font-weight: 700; }
+    .day-lbl .day-tag {
+      display: block; font-size: 8px; font-weight: 700;
+      letter-spacing: 0.06em; text-transform: uppercase;
+      margin-top: 3px; border-top: 1px solid rgba(0,0,0,0.06);
+      padding-top: 3px; width: 100%; text-align: center;
+    }
+    /* Open */
+    .day.open .day-lbl { border-color: #e2e8f0; color: #475569; }
+    .day.open .day-lbl .day-tag { color: #94a3b8; }
+    /* Limited */
+    .day.limited .day-lbl { border-color: #f59e0b; color: #92400e; background: #fffbeb; }
+    .day.limited .day-lbl .day-tag { color: #d97706; }
+    /* Full */
+    .day.hot .day-lbl { border-color: #ef4444; color: #b91c1c; background: #fff5f5; }
+    .day.hot .day-lbl .day-tag { color: #ef4444; }
+    /* Checked state */
     .day input:checked + .day-lbl {
-      background: #1565c0;
-      border-color: #1565c0;
-      color: white;
+      background: #1565c0; border-color: #1565c0; color: white;
       box-shadow: 0 2px 8px rgba(21,101,192,0.3);
     }
+    .day input:checked + .day-lbl .day-tag { color: rgba(255,255,255,0.75); }
 
     /* ─── Photo zone ─── */
     .photo-drop {
@@ -606,14 +628,15 @@
 
       <div class="field">
         <label class="field-label">Days Available</label>
+        <div class="avail-banner">🔴 Tue &amp; Sat almost full — <span>book now to lock in your spot</span></div>
         <div class="day-row">
-          <div class="day"><input type="checkbox" id="d_mon" name="days[]" value="Mon"><label class="day-lbl" for="d_mon">Mon</label></div>
-          <div class="day"><input type="checkbox" id="d_tue" name="days[]" value="Tue"><label class="day-lbl" for="d_tue">Tue</label></div>
-          <div class="day"><input type="checkbox" id="d_wed" name="days[]" value="Wed"><label class="day-lbl" for="d_wed">Wed</label></div>
-          <div class="day"><input type="checkbox" id="d_thu" name="days[]" value="Thu"><label class="day-lbl" for="d_thu">Thu</label></div>
-          <div class="day"><input type="checkbox" id="d_fri" name="days[]" value="Fri"><label class="day-lbl" for="d_fri">Fri</label></div>
-          <div class="day"><input type="checkbox" id="d_sat" name="days[]" value="Sat"><label class="day-lbl" for="d_sat">Sat</label></div>
-          <div class="day"><input type="checkbox" id="d_sun" name="days[]" value="Sun"><label class="day-lbl" for="d_sun">Sun</label></div>
+          <div class="day open">   <input type="checkbox" id="d_mon" name="days[]" value="Mon"><label class="day-lbl" for="d_mon"><span class="day-name">Mon</span><span class="day-tag">Open</span></label></div>
+          <div class="day hot">    <input type="checkbox" id="d_tue" name="days[]" value="Tue"><label class="day-lbl" for="d_tue"><span class="day-name">Tue</span><span class="day-tag">1 left</span></label></div>
+          <div class="day open">   <input type="checkbox" id="d_wed" name="days[]" value="Wed"><label class="day-lbl" for="d_wed"><span class="day-name">Wed</span><span class="day-tag">Open</span></label></div>
+          <div class="day limited"><input type="checkbox" id="d_thu" name="days[]" value="Thu"><label class="day-lbl" for="d_thu"><span class="day-name">Thu</span><span class="day-tag">2 left</span></label></div>
+          <div class="day open">   <input type="checkbox" id="d_fri" name="days[]" value="Fri"><label class="day-lbl" for="d_fri"><span class="day-name">Fri</span><span class="day-tag">Open</span></label></div>
+          <div class="day hot">    <input type="checkbox" id="d_sat" name="days[]" value="Sat"><label class="day-lbl" for="d_sat"><span class="day-name">Sat</span><span class="day-tag">1 left</span></label></div>
+          <div class="day open">   <input type="checkbox" id="d_sun" name="days[]" value="Sun"><label class="day-lbl" for="d_sun"><span class="day-name">Sun</span><span class="day-tag">Open</span></label></div>
         </div>
       </div>
 
